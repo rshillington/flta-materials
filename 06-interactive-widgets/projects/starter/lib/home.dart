@@ -6,8 +6,6 @@ import 'screens/grocery_screen.dart';
 import 'package:provider/provider.dart';
 import 'models/models.dart';
 
-
-
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -30,16 +28,16 @@ class _HomeState extends State<Home> {
     return Consumer<TabManager>(
       builder: (context, tabManager, child) {
         return Scaffold(
-      appBar: AppBar(
+          appBar: AppBar(
             title: Text(
               'Fooderlich',
               style: Theme.of(context).textTheme.headline6,
             ),
-      ),
+          ),
           // 2
-          // TODO: Replace body
-          body: pages[tabManager.selectedTab],
-      bottomNavigationBar: BottomNavigationBar(
+          body: IndexedStack(index: tabManager.selectedTab, children: pages),
+
+          bottomNavigationBar: BottomNavigationBar(
             selectedItemColor:
                 Theme.of(context).textSelectionTheme.selectionColor,
             // 3
@@ -62,10 +60,9 @@ class _HomeState extends State<Home> {
                 label: 'To Buy',
               ),
             ],
-      ),
-    );
+          ),
+        );
       },
     );
-
   }
 }
